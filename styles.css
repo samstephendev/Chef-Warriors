@@ -521,7 +521,10 @@ address {
   height: 44px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center center;
   flex-shrink: 0;
+  /* Thin gold ring to frame the yellow logo against the dark nav */
+  border: 2px solid rgba(242, 184, 75, 0.5);
 }
 
 .nav__logo-fallback {
@@ -813,8 +816,10 @@ address {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center center;
   align-self: flex-start;
   flex-shrink: 0;
+  border: 2px solid rgba(242, 184, 75, 0.4);
 }
 
 .visit__logo-fallback {
