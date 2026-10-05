@@ -1,0 +1,1210 @@
+/* ================================================================
+   styles.css — The Chef Warriors
+   Mobile-first CSS3, no frameworks, no JS.
+   Organised by: tokens → reset → base → components → sections → utilities
+   ================================================================ */
+
+
+/* ================================================================
+   1. DESIGN TOKENS (CSS custom properties)
+   ================================================================ */
+:root {
+  /* Colours */
+  --bg:           #0D0B0A;
+  --text:         #F5EFE6;
+  --muted:        #A59B90;
+  --soft:         #CFC5B8;
+  --red:          #E0352B;
+  --red-dark:     #8E1A14;
+  --gold:         #F2B84B;
+  --gold-dark:    #D9892B;
+  --glass:        rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.10);
+
+  /* Radii */
+  --radius-card:   28px;
+  --radius-pill:   999px;
+
+  /* Spacing */
+  --container-max: 1200px;
+  --pad-x-mobile:  16px;
+  --pad-x-desktop: 56px;
+
+  /* Typography */
+  --font-sans:   'Bricolage Grotesque', system-ui, sans-serif;
+  --font-serif:  'Instrument Serif', Georgia, serif;
+
+  /* Shadows */
+  --shadow-lift: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-btn:  0 4px 16px rgba(224, 53, 43, 0.35);
+}
+
+
+/* ================================================================
+   2. RESET & BASE
+   ================================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Keep scrollbar visible to avoid layout shift */
+  overflow-y: scroll;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  /* Prevent horizontal overflow from glow blobs */
+  overflow-x: hidden;
+}
+
+/* Remove list styles where role="list" is present */
+[role="list"] {
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+address {
+  font-style: normal;
+}
+
+/* Focus styles — visible for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+
+/* ================================================================
+   3. PAGE WRAPPER — clips overflow from glow blobs
+   ================================================================ */
+.page-wrapper {
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+/* ================================================================
+   4. LAYOUT — container, section spacing
+   ================================================================ */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--pad-x-mobile);
+}
+
+.section {
+  padding-block: 56px 48px;
+}
+
+/* Section heading shared style */
+.section__heading {
+  font-size: clamp(1.75rem, 5vw + 0.5rem, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+
+
+/* ================================================================
+   5. TYPOGRAPHY UTILITIES
+   ================================================================ */
+
+/* Italic serif accent word (gold) */
+.accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400; /* Instrument Serif is regular weight */
+}
+
+
+/* ================================================================
+   6. PILL / BADGE
+   ================================================================ */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--soft);
+  white-space: nowrap;
+}
+
+.pill--sm {
+  padding: 4px 12px;
+  font-size: 0.7rem;
+}
+
+
+/* ================================================================
+   7. BUTTONS
+   ================================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Primary — red gradient */
+.btn--primary,
+.btn--red {
+  background: linear-gradient(135deg, var(--red), var(--red-dark));
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+}
+
+.btn--primary:hover,
+.btn--red:hover {
+  box-shadow: 0 8px 24px rgba(224, 53, 43, 0.5);
+}
+
+/* Outlined */
+.btn--outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--glass-border);
+}
+
+.btn--outline:hover {
+  background: var(--glass);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Cream (for Visit section) */
+.btn--cream {
+  background: var(--soft);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.btn--cream:hover {
+  background: #E8DDD2;
+}
+
+/* Social (footer outlined) */
+.btn--social {
+  background: transparent;
+  color: var(--soft);
+  border: 1px solid var(--glass-border);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn--social:hover {
+  background: var(--glass);
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Full-width button */
+.btn--full {
+  width: 100%;
+}
+
+
+/* ================================================================
+   8. BENTO GRID — shared grid for Menu & Visit sections
+   ================================================================ */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  /* Row height: auto on mobile, constrained via tile min-height */
+}
+
+/* Span modifiers */
+.tile--span-2col {
+  grid-column: span 2;
+}
+
+.tile--span-2row {
+  grid-row: span 2;
+}
+
+
+/* ================================================================
+   9. TILE / CARD
+   ================================================================ */
+.tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  min-height: 150px;
+  /* Smooth hover */
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tile:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+/* Inner layout — flexbox column, label on top, price on bottom */
+.tile__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: inherit;
+  padding: 20px;
+  gap: 8px;
+}
+
+/* Extra top padding when a tile has a top image (shawarma, burger, bucket) */
+.tile--has-img .tile__inner {
+  padding-top: 90px;
+}
+
+/* Label (small muted text, top-left) */
+.tile__label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tile__label--dark {
+  color: rgba(13, 11, 10, 0.55);
+}
+
+/* Name */
+.tile__name {
+  font-size: clamp(1rem, 3vw + 0.25rem, 1.375rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+  margin: 0;
+}
+
+.tile__name--dark {
+  color: var(--bg);
+}
+
+/* Price */
+.tile__price {
+  display: block;
+  font-size: clamp(1.75rem, 6vw + 0.25rem, 2.875rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text);
+  margin-top: 2px;
+}
+
+.tile__price--dark {
+  color: var(--bg);
+}
+
+/* Sub-text (used in visit tiles) */
+.tile__sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Text group pushed to the bottom */
+.tile__text--bottom {
+  margin-top: auto;
+}
+
+/* Pill inside tile (best seller, for students) */
+.tile__pill {
+  align-self: flex-start;
+  margin-bottom: 4px;
+}
+
+.tile__pill--dark {
+  background: rgba(13, 11, 10, 0.12);
+  border-color: rgba(13, 11, 10, 0.2);
+  color: rgba(13, 11, 10, 0.7);
+}
+
+/* Tile image variants */
+.tile__img {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Family Bucket hero tile — bucket centred at the top, bleeds upward */
+.tile__img--cropped {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: auto;
+  opacity: 0.95;
+}
+
+/* Shawarma — centred at the top of its tile */
+.tile__img--top-right {
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
+  width: 54px;
+  height: auto;
+  opacity: 0.92;
+}
+
+/* Burger — centred at the top of its tile */
+.tile__img--bottom-right {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: auto;
+  right: auto;
+  width: 80px;
+  height: auto;
+  opacity: 0.90;
+}
+
+
+/* ================================================================
+   10. TILE COLOUR VARIANTS
+   ================================================================ */
+
+/* Red gradient tile */
+.tile--red {
+  background: linear-gradient(145deg, var(--red), var(--red-dark));
+  border-color: rgba(224, 53, 43, 0.3);
+}
+
+.tile--red .tile__label {
+  color: rgba(245, 239, 230, 0.6);
+}
+
+.tile--red .tile__name {
+  color: var(--text);
+}
+
+/* Family Bucket price — large but not breaking on mobile */
+.tile--red .tile__price {
+  font-size: clamp(2.75rem, 10vw + 0.5rem, 5.25rem);
+}
+
+.tile--red .tile__pill {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* Gold gradient tile */
+.tile--gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border-color: rgba(242, 184, 75, 0.3);
+}
+
+.tile--gold .tile__price {
+  font-size: clamp(2rem, 7vw + 0.25rem, 3.75rem);
+}
+
+/* Wide full-width card (Outlets) */
+.tile--wide {
+  grid-column: 1 / -1;
+}
+
+/* Visit tile inner layout — row on mobile too: logo right, text left */
+.tile--visit .tile__inner {
+  padding: 20px;
+}
+
+.tile__inner--visit {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  height: 100%;
+}
+
+
+/* ================================================================
+   11. NAV
+   ================================================================ */
+.nav-wrap {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  /* Pointer events pass through the space around the pill */
+  pointer-events: none;
+  padding-inline: var(--pad-x-mobile);
+  max-width: calc(var(--container-max) + var(--pad-x-mobile) * 2);
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  width: 100%;
+  max-width: 960px;
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(13, 11, 10, 0.72);
+  border: 1px solid var(--glass-border);
+  /* Frosted glass appearance */
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+          backdrop-filter: blur(20px) saturate(1.5);
+}
+
+/* Brand / logo area */
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.nav__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.nav__logo-fallback {
+  display: none; /* shown via JS onerror */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--bg);
+  font-size: 0.75rem;
+  font-weight: 800;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav__brand-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* Allow up to ~160px before truncating */
+  max-width: 160px;
+}
+
+/* Centre nav links — hidden on mobile */
+.nav__links {
+  display: none;
+  list-style: none;
+  gap: 4px;
+}
+
+.nav__link {
+  display: block;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--soft);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  background: var(--glass);
+  color: var(--text);
+}
+
+/* Nav CTA */
+.nav__cta {
+  padding: 9px 18px;
+  font-size: 0.82rem;
+  min-height: 40px;
+  flex-shrink: 0;
+}
+
+
+/* ================================================================
+   12. HERO SECTION
+   ================================================================ */
+.hero {
+  position: relative;
+  padding-top: 24px;
+  padding-bottom: 48px;
+  overflow: hidden;
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Hero text block */
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* On mobile, render first */
+  order: 1;
+}
+
+.hero__tag {
+  align-self: flex-start;
+}
+
+/* Giant headline — clamp uses vw+rem so it scales smoothly on phones */
+.hero__headline {
+  font-size: clamp(2.75rem, 9vw + 0.5rem, 7.25rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+
+/* Sub paragraph */
+.hero__sub {
+  font-size: clamp(0.95rem, 2.5vw + 0.25rem, 1.2rem);
+  color: var(--soft);
+  max-width: 520px;
+  line-height: 1.55;
+}
+
+/* CTA buttons — stacked full-width on mobile, row on tablet+ */
+.hero__btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* On mobile render AFTER the visual */
+  order: 3;
+}
+
+/* Full-width buttons on mobile only */
+.hero__btns .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Visual / illustration side */
+.hero__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* On mobile render BETWEEN text and buttons */
+  order: 2;
+  min-height: 280px;
+}
+
+/* Red glow circle behind the bucket */
+.hero__glow-circle {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: var(--red);
+  opacity: 0.45;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Bucket illustration */
+.hero__bucket {
+  position: relative;
+  z-index: 1;
+  width: clamp(220px, 65vw, 290px);
+  height: auto;
+  /* Slight drop shadow for depth */
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,0.5));
+}
+
+/* Fallback placeholder if SVG fails */
+.hero__bucket-fallback {
+  width: 290px;
+  height: 362px;
+  border-radius: 20px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+}
+
+/* Floating glass chips — hidden on mobile, shown on desktop */
+.hero__chip {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+}
+
+.hero__chip-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero__chip-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.hero__chip--hours {
+  top: 12%;
+  left: -4%;
+}
+
+.hero__chip--price {
+  bottom: 14%;
+  right: -4%;
+}
+
+
+/* ================================================================
+   13. GLOW BLOBS — decorative background shapes
+   ================================================================ */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow--red {
+  width: 480px;
+  height: 480px;
+  background: var(--red);
+  opacity: 0.18;
+  top: -80px;
+  right: -120px;
+}
+
+.glow--gold {
+  width: 320px;
+  height: 320px;
+  background: var(--gold);
+  opacity: 0.10;
+  top: 60%;
+  left: -80px;
+}
+
+
+/* ================================================================
+   14. MENU SECTION — overrides for menu bento grid row heights
+   ================================================================ */
+.menu .bento {
+  /* On mobile: 2 cols, rows tall enough for image + name + price */
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 160px;
+  gap: 10px;
+}
+
+/* The 2×2 hero tile spans 2 rows */
+.menu .tile--span-2row {
+  grid-row: span 2;
+  /* Height = 2 × 160px + 10px gap = 330px */
+}
+
+/* Mobile image sizing — smaller to fit shorter tiles */
+.menu .tile__img--cropped {
+  width: 110px;
+  top: -6px;
+}
+
+.menu .tile__img--top-right {
+  width: 44px;
+  top: 10px;
+}
+
+.menu .tile__img--bottom-right {
+  width: 64px;
+  top: 8px;
+}
+
+/* Mobile has-img padding matches smaller image height */
+.menu .tile--has-img .tile__inner {
+  padding-top: 78px;
+}
+
+
+/* ================================================================
+   15. VISIT SECTION
+   ================================================================ */
+.visit .bento {
+  /* Mobile: full 2-col grid; large tile spans both */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+/* Large address tile: full width on mobile */
+.visit .tile--span-2col {
+  grid-column: span 2;
+}
+
+/* Logo in visit tile */
+.visit__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.visit__logo-fallback {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--bg);
+  font-size: 0.7rem;
+  font-weight: 800;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.visit__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.visit__address {
+  font-size: clamp(0.875rem, 3vw + 0.1rem, 1.15rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.visit__modes {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.visit__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+
+/* The call button shows only on mobile */
+.visit__call-btn {
+  display: inline-flex;
+}
+
+
+/* ================================================================
+   16. OUTLETS SECTION
+   ================================================================ */
+.outlets__card {
+  padding: 32px 28px;
+}
+
+.outlets__title {
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+/* Single column list on mobile */
+.outlets__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.outlets__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.outlets__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.outlets__area {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.outlets__desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+
+/* ================================================================
+   17. FOOTER
+   ================================================================ */
+.footer {
+  border-top: 1px solid var(--glass-border);
+  padding-block: 32px;
+  /* Extra space for the sticky bar on mobile */
+  padding-bottom: 96px;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.footer__copy {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.footer__social {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+/* ================================================================
+   18. MOBILE STICKY BOTTOM BAR
+   ================================================================ */
+.sticky-bar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 90;
+  padding-inline: var(--pad-x-mobile);
+  /* Only visible on mobile — hidden via media query */
+}
+
+.sticky-bar .btn {
+  font-size: 0.9rem;
+  padding: 14px 24px;
+  box-shadow: 0 8px 32px rgba(224, 53, 43, 0.45), 0 2px 8px rgba(0,0,0,0.4);
+}
+
+
+/* ================================================================
+   19. BREAKPOINT: 768px — tablet
+   ================================================================ */
+@media (min-width: 768px) {
+
+  /* Container padding grows */
+  .container {
+    padding-inline: 32px;
+  }
+
+  /* Hero: side-by-side layout */
+  .hero__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .hero__text {
+    order: unset;
+    flex: 1;
+  }
+
+  .hero__visual {
+    order: unset;
+    flex: 0 0 auto;
+    min-height: unset;
+  }
+
+  .hero__btns {
+    order: unset;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Buttons revert to auto-width at tablet */
+  .hero__btns .btn {
+    width: auto;
+  }
+
+  .hero__bucket {
+    width: clamp(290px, 42vw, 390px);
+  }
+
+  /* Section padding grows at tablet */
+  .section {
+    padding-block: 72px 60px;
+  }
+
+  .section__heading {
+    margin-bottom: 36px;
+  }
+
+  /* Menu grid: 4 columns on tablet, taller rows */
+  .menu .bento {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 180px;
+    gap: 14px;
+  }
+
+  /* Restore image sizes at tablet */
+  .menu .tile__img--cropped   { width: 140px; top: -10px; }
+  .menu .tile__img--top-right { width: 54px;  top: 12px;  }
+  .menu .tile__img--bottom-right { width: 80px; top: 10px; }
+
+  /* Restore has-img padding at tablet */
+  .menu .tile--has-img .tile__inner {
+    padding-top: 90px;
+  }
+
+  /* Visit grid: 4 cols */
+  .visit .bento {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  /* Visit large tile spans 2 */
+  .visit .tile--span-2col {
+    grid-column: span 2;
+  }
+
+  /* Visit logo restored to full size, floated right */
+  .visit__logo {
+    width: 48px;
+    height: 48px;
+    margin-left: auto;
+    order: 2;
+    flex-shrink: 0;
+  }
+
+  .visit__logo-fallback {
+    width: 48px;
+    height: 48px;
+    margin-left: auto;
+    order: 2;
+  }
+
+  .visit__content {
+    order: 1;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .visit__actions {
+    width: 100%;
+    order: 3;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-top: 12px;
+    margin-top: 0;
+  }
+
+  /* Hide call button on tablet+ */
+  .visit__call-btn {
+    display: none;
+  }
+
+  /* Outlets: 2 columns on tablet */
+  .outlets__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 32px;
+  }
+
+  /* Footer: row layout */
+  .footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  /* Hide sticky bar on tablet+ */
+  .sticky-bar {
+    display: none;
+  }
+
+  /* Footer no longer needs extra bottom padding */
+  .footer {
+    padding-bottom: 32px;
+  }
+}
+
+
+/* ================================================================
+   20. BREAKPOINT: 1100px — desktop
+   ================================================================ */
+@media (min-width: 1100px) {
+
+  /* Container padding at desktop width */
+  .container {
+    padding-inline: var(--pad-x-desktop);
+  }
+
+  /* Nav: show centre links */
+  .nav__links {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav__brand-name {
+    max-width: none;
+  }
+
+  /* Hero: more generous spacing */
+  .hero {
+    padding-top: 48px;
+    padding-bottom: 96px;
+  }
+
+  .hero__inner {
+    gap: 64px;
+  }
+
+  .hero__bucket {
+    width: clamp(390px, 36vw, 470px);
+  }
+
+  /* Show floating chips */
+  .hero__chip {
+    display: flex;
+  }
+
+  /* Menu: 4 columns at 210px rows */
+  .menu .bento {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 210px;
+    gap: 16px;
+  }
+
+  /* Menu hero tile price at max size */
+  .tile--red .tile__price {
+    font-size: 5.25rem;
+  }
+
+  .tile__price {
+    font-size: 2.875rem;
+  }
+
+  .tile__name {
+    font-size: 1.375rem;
+  }
+
+  /* Cropped bucket image larger on desktop */
+  .tile__img--cropped {
+    width: 180px;
+    top: -16px;
+  }
+
+  /* Visit: 4 columns */
+  .visit .bento {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  /* Outlets: 4 columns */
+  .outlets__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  /* Outlets items: vertical dividers instead of bottom borders */
+  .outlets__item {
+    border-bottom: none;
+    padding-bottom: 0;
+    padding-right: 28px;
+    border-right: 1px solid var(--glass-border);
+    padding-left: 28px;
+  }
+
+  .outlets__item:first-child {
+    padding-left: 0;
+  }
+
+  .outlets__item:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  /* Section spacing */
+  .section {
+    padding-block: 96px 80px;
+  }
+}

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 180" fill="none" aria-label="Rolled shawarma">
+
+  <!-- === PITA ROLL BODY (slightly tapered cylinder, wider at top) === -->
+  <!-- Main wrap body -->
+  <path d="M18 60 Q18 155 30 168 Q60 178 90 168 Q102 155 102 60 Z" fill="#E8C97A"/>
+
+  <!-- Shading on right edge of wrap -->
+  <path d="M90 60 Q100 100 102 60 Z" fill="#D9A84B" opacity="0.5"/>
+
+  <!-- Shading on left edge of wrap -->
+  <path d="M18 60 Q20 100 22 60 Z" fill="#C9922B" opacity="0.4"/>
+
+  <!-- Wrap paper bands (lower half) -->
+  <path d="M22 118 Q60 125 98 118 L98 130 Q60 137 22 130 Z" fill="#F5EFE6" opacity="0.85"/>
+  <path d="M26 138 Q60 144 94 138 L93 148 Q60 154 27 148 Z" fill="#F5EFE6" opacity="0.70"/>
+
+  <!-- Paper wrap outline/border -->
+  <path d="M28 158 Q60 165 92 158 L90 168 Q60 178 30 168 Z" fill="#F5EFE6" opacity="0.55"/>
+
+  <!-- === FILLING visible at the open top === -->
+  <!-- Ellipse opening at top of roll -->
+  <ellipse cx="60" cy="60" rx="42" ry="14" fill="#C9922B"/>
+
+  <!-- Meat layer -->
+  <ellipse cx="60" cy="57" rx="38" ry="11" fill="#7B3B1A"/>
+
+  <!-- Veggie / green layer -->
+  <ellipse cx="60" cy="54" rx="36" ry="9" fill="#4A7C3F"/>
+
+  <!-- Sauce drizzle -->
+  <ellipse cx="60" cy="51.5" rx="32" ry="7.5" fill="#E8C97A"/>
+
+  <!-- Another meat/filling peek -->
+  <ellipse cx="60" cy="49" rx="28" ry="6" fill="#9B4E1E"/>
+
+  <!-- Top rim of the roll (pita wrap edge) -->
+  <ellipse cx="60" cy="46" rx="42" ry="10" fill="#F2D07A"/>
+  <ellipse cx="60" cy="44" rx="38" ry="8" fill="#E8C97A"/>
+
+  <!-- Highlight on wrap body -->
+  <path d="M24 70 Q27 120 26 145 Q22 130 22 70 Z" fill="white" opacity="0.10"/>
+
+  <!-- Sesame / speckle dots on the pita surface -->
+  <ellipse cx="45" cy="90" rx="2" ry="1" fill="#C9922B" opacity="0.5" transform="rotate(-10 45 90)"/>
+  <ellipse cx="72" cy="100" rx="2" ry="1" fill="#C9922B" opacity="0.5" transform="rotate(8 72 100)"/>
+  <ellipse cx="54" cy="110" rx="2" ry="1" fill="#C9922B" opacity="0.45" transform="rotate(-5 54 110)"/>
+  <ellipse cx="78" cy="88" rx="2" ry="1" fill="#C9922B" opacity="0.4" transform="rotate(12 78 88)"/>
+</svg>
